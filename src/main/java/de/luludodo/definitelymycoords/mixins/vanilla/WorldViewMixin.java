@@ -2,9 +2,8 @@ package de.luludodo.definitelymycoords.mixins.vanilla;
 
 import de.luludodo.definitelymycoords.api.DMCApi;
 import de.luludodo.definitelymycoords.config.ConfigAPI;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import de.luludodo.definitelymycoords.reflection.ReflectionHelper;
+import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -45,11 +44,13 @@ public interface WorldViewMixin {
 
     @Unique
     private RegistryEntry<Biome> definitelymycoords$toEntry(RegistryKey<Biome> biome) {
-        return getRegistryManager().get(RegistryKeys.BIOME).entryOf(biome);
+        return definitelymycoords$toEntry(biome.getValue());
     }
 
+    // Sorry for the scuffed code, but minecraft changed how Registries worked and only some methods work in both versions
     @Unique
     private RegistryEntry<Biome> definitelymycoords$toEntry(Identifier biome) {
-        return definitelymycoords$toEntry(RegistryKey.of(RegistryKeys.BIOME, biome));
+        Registry<Biome> registry = getRegistryManager().get(RegistryKeys.BIOME);
+        return registry.getEntry(registry.getOrEmpty(biome).orElseThrow());
     }
 }
