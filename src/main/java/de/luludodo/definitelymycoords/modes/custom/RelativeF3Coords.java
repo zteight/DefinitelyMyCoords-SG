@@ -1,5 +1,6 @@
 package de.luludodo.definitelymycoords.modes.custom;
 
+import de.luludodo.definitelymycoords.DefinitelyMyCoords;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -55,6 +56,11 @@ public class RelativeF3Coords {
     }
     public static int getOldBlockZ() {
         return debugHudOpen? oldBlockZ : getBlockZ();
+    }
+
+    public static String getDim() {
+        assert CLIENT.world != null;
+        return CLIENT.world.getRegistryKey().getValue().toString();
     }
 
     private static double getX() {

@@ -1,8 +1,10 @@
 package de.luludodo.definitelymycoords.api;
 
+import de.luludodo.definitelymycoords.DefinitelyMyCoords;
 import de.luludodo.definitelymycoords.modes.custom.RelativeF3Coords;
 import de.luludodo.definitelymycoords.config.ConfigAPI;
 import de.luludodo.definitelymycoords.modes.Mode;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -428,7 +430,27 @@ public class DMCApi {
     }
 
     public static boolean isVanilla() {
-        return ConfigAPI.getMode() == Mode.VANILLA;
+        if (RelativeF3Coords.getDim() == null) {
+            return true;
+        }
+        if (!RelativeF3Coords.getDim().equals(ConfigAPI.getDimension())) {
+            return true;
+        }
+
+        double coordX = RelativeF3Coords.getOldX();
+        double coordZ = RelativeF3Coords.getOldZ();
+
+        long[] offsetBoundaryX = ConfigAPI.getOffsetBoundaryX();
+        long[] offsetBoundaryZ = ConfigAPI.getOffsetBoundaryZ();
+
+        if(coordX < Math.max(offsetBoundaryX[0], offsetBoundaryX[1]) && coordX > Math.min(offsetBoundaryX[0], offsetBoundaryX[1])) {
+            if (coordZ < Math.max(offsetBoundaryZ[0], offsetBoundaryZ[1]) && coordZ > Math.min(offsetBoundaryZ[0], offsetBoundaryZ[1])) {
+                return false;
+            }
+        }
+
+        //return ConfigAPI.getMode() == Mode.VANILLA;
+        return true;
     }
 
     public static boolean obscureRotations() {

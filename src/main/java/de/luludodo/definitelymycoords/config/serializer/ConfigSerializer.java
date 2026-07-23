@@ -19,9 +19,14 @@ public class ConfigSerializer implements MapSerializer<String, Object> {
         config.put("offset-x", get(configObject, "offset-x", JsonElement::getAsLong));
         config.put("offset-y", get(configObject, "offset-y", JsonElement::getAsLong));
         config.put("offset-z", get(configObject, "offset-z", JsonElement::getAsLong));
+        config.put("offset-boundary-x1", get(configObject, "offset-boundary-x1", JsonElement::getAsLong));
+        config.put("offset-boundary-x2", get(configObject, "offset-boundary-x2", JsonElement::getAsLong));
+        config.put("offset-boundary-z1", get(configObject, "offset-boundary-z1", JsonElement::getAsLong));
+        config.put("offset-boundary-z2", get(configObject, "offset-boundary-z2", JsonElement::getAsLong));
         config.put("obscure-rotations", get(configObject, "obscure-rotations", JsonElement::getAsBoolean));
         config.put("spoof-biome", get(configObject, "spoof-biome", JsonElement::getAsBoolean));
         config.put("biome", get(configObject, "biome", json -> Identifier.tryParse(json.getAsString())));
+        config.put("dimension", get(configObject, "dimension", JsonElement::getAsString));
         return config;
     }
 
@@ -32,9 +37,14 @@ public class ConfigSerializer implements MapSerializer<String, Object> {
         configObject.add("offset-x", new JsonPrimitive((long) config.get("offset-x")));
         configObject.add("offset-y", new JsonPrimitive((long) config.get("offset-y")));
         configObject.add("offset-z", new JsonPrimitive((long) config.get("offset-z")));
+        configObject.add("offset-boundary-x1", new JsonPrimitive((long) config.get("offset-boundary-x1")));
+        configObject.add("offset-boundary-x2", new JsonPrimitive((long) config.get("offset-boundary-x2")));
+        configObject.add("offset-boundary-z1", new JsonPrimitive((long) config.get("offset-boundary-z1")));
+        configObject.add("offset-boundary-z2", new JsonPrimitive((long) config.get("offset-boundary-z2")));
         configObject.add("obscure-rotations", new JsonPrimitive((boolean) config.get("obscure-rotations")));
         configObject.add("spoof-biome", new JsonPrimitive((boolean) config.get("spoof-biome")));
         configObject.add("biome", new JsonPrimitive(config.get("biome").toString()));
+        configObject.add("dimension", new JsonPrimitive(config.get("dimension").toString()));
         return configObject;
     }
 }

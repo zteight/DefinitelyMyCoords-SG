@@ -13,7 +13,8 @@ import java.util.Objects;
 @Mixin(value = InfoDisplay.class, remap = false)
 public class InfoDisplayMixin {
     @ModifyVariable(
-            method = "<init>(Ljava/lang/String;Lnet/minecraft/text/Text;Ljava/lang/Object;Lxaero/hud/minimap/info/codec/InfoDisplayStateCodec;Lxaero/hud/minimap/info/widget/InfoDisplayWidgetFactory;Lxaero/hud/minimap/info/render/compile/InfoDisplayOnCompile;Ljava/util/function/Consumer;)V",
+            method = "<init>(Ljava/lang/String;Lnet/minecraft/text/Text;Ljava/lang/Object;Lxaero/lib/common/config/option/value/io/serialization/ConfigValueIOCodec;Lxaero/hud/minimap/info/widget/InfoDisplayWidgetFactory;Lxaero/hud/minimap/info/render/compile/InfoDisplayOnCompile;Ljava/util/function/Function;)V",
+            //method = "<init>(Ljava/lang/String;Lnet/minecraft/text/Text;Ljava/lang/Object;Lxaero/hud/minimap/info/codec/InfoDisplayStateCodec;Lxaero/hud/minimap/info/widget/InfoDisplayWidgetFactory;Lxaero/hud/minimap/info/render/compile/InfoDisplayOnCompile;Ljava/util/function/Consumer;)V",
             at = @At("HEAD"),
             index = 6,
             argsOnly = true,

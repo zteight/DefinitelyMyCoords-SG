@@ -21,6 +21,20 @@ public class ConfigAPI {
         return (long) DefinitelyMyCoords.CONFIG.get("offset-z");
     }
 
+    public static long[] getOffsetBoundaryX() {
+        long x1 = (long) DefinitelyMyCoords.CONFIG.get("offset-boundary-x1");
+        long x2 = (long) DefinitelyMyCoords.CONFIG.get("offset-boundary-x2");
+        return new long[]{x1, x2};
+    }
+    public static long[] getOffsetBoundaryZ() {
+        long z1 = (long) DefinitelyMyCoords.CONFIG.get("offset-boundary-z1");
+        long z2 = (long) DefinitelyMyCoords.CONFIG.get("offset-boundary-z2");
+        return new long[]{z1, z2};
+    }
+    public static String getDimension() {
+        return (String) DefinitelyMyCoords.CONFIG.get("dimension");
+    }
+
     public static boolean getObscureRotations() {
         return (boolean) DefinitelyMyCoords.CONFIG.get("obscure-rotations");
     }

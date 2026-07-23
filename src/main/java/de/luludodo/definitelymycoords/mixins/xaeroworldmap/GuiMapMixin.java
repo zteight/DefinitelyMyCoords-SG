@@ -16,7 +16,7 @@ import xaero.map.gui.GuiMap;
 @Mixin(value = GuiMap.class, remap = false)
 public class GuiMapMixin {
     @Redirect(
-            method = "render",
+            method = "method_25394",
             at = @At(
                     value = "INVOKE",
                     target = "Lxaero/map/graphics/MapRenderHelper;drawCenteredStringWithBackground(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIFFFFLnet/minecraft/client/render/VertexConsumer;)V",
